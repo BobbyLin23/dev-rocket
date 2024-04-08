@@ -1,0 +1,4 @@
+{
+  "extends": ["next/core-web-vitals", "prettier"],
+  "exclude": ["node_modules", ".next", "*.json", "*.md"]
+}
