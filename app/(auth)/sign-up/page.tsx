@@ -14,12 +14,12 @@ export default function Page() {
         <p className="text-muted-foreground">Create a new account</p>
       </div>
       <div className="space-y-4">
-        <Button className="w-full" variant="secondary">
-          <GithubLogo className="mr-2" />
+        <Button className="w-full">
+          <GithubLogo className="mr-2 w-4 h-4" />
           Continue with Github
         </Button>
-        <Button className="w-full" variant="outline">
-          <GoogleLogo className="mr-2" />
+        <Button className="w-full">
+          <GoogleLogo className="mr-2 w-4 h-4" />
           Continue with Google
         </Button>
       </div>

@@ -14,12 +14,12 @@ export default function Page() {
         <p className="text-muted-foreground">Sign in to your account</p>
       </div>
       <div className="space-y-4">
-        <Button className="w-full" variant="secondary">
-          <GithubLogo className="mr-2" />
+        <Button className="w-full">
+          <GithubLogo className="mr-2 h-4 w-4" />
           Continue with Github
         </Button>
-        <Button className="w-full" variant="outline">
-          <GoogleLogo className="mr-2" />
+        <Button className="w-full">
+          <GoogleLogo className="mr-2 h-4 w-4" />
           Continue with Google
         </Button>
       </div>
@@ -41,7 +41,10 @@ export default function Page() {
         <div className="grid gap-2">
           <div className="flex items-center">
             <Label htmlFor="password">Password</Label>
-            <Link href="#" className="ml-auto inline-block text-sm underline">
+            <Link
+              href="#"
+              className="ml-auto inline-block text-sm underline hover:opacity-75"
+            >
               Forgot your password?
             </Link>
           </div>
@@ -52,9 +55,7 @@ export default function Page() {
             required
           />
         </div>
-        <Button type="submit" className="w-full">
-          Sign in
-        </Button>
+        <Button className="w-full">Sign in</Button>
       </div>
       <div className="mt-4 text-center text-sm">
         Don&apos;t have an account?{' '}
