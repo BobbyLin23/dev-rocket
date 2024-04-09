@@ -21,7 +21,7 @@ export const register = async (values: z.infer<typeof authSchema>) => {
   const { error } = await supabase.auth.signUp({ email, password })
 
   if (error) {
-    return { error }
+    return { error: error.message }
   }
 
   revalidatePath('/')

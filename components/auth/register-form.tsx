@@ -27,12 +27,11 @@ export function RegisterForm() {
     },
   })
 
-  const onSubmit = form.handleSubmit((values: z.infer<typeof authSchema>) => {
+  const onSubmit = (values: z.infer<typeof authSchema>) => {
     startTransition(() => {
-      console.log(values)
-      register(JSON.parse(JSON.stringify(values))).then((result) => {
+      register(values).then((result) => {
         if (result) {
-          toast.error(result.error.message)
+          toast.error(result.error.toString())
         } else {
           toast.success(
             'Success! Please check your email to verify your account.'
@@ -40,11 +39,14 @@ export function RegisterForm() {
         }
       })
     })
-  })
+  }
 
   return (
     <Form {...form}>
-      <form onSubmit={onSubmit} className="flex w-[400px] flex-col gap-y-8">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="flex w-[400px] flex-col gap-y-8"
+      >
         <div>
           <h1 className="text-2xl font-semibold">Get Started</h1>
           <p className="text-muted-foreground">Create a new account</p>
@@ -118,7 +120,7 @@ export function RegisterForm() {
         </div>
         <div className="mt-4 text-center text-sm">
           Have an account?{' '}
-          <Link href="/auth/sign-in" className="underline hover:opacity-75">
+          <Link href="/auth/login" className="underline hover:opacity-75">
             Sign In Now
           </Link>
         </div>

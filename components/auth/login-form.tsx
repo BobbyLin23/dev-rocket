@@ -18,8 +18,11 @@ import {
   FormItem,
   FormMessage,
 } from '@/components/ui/form'
+import { createClient } from '@/lib/supabase/client'
 
 export function LoginForm() {
+  const supabase = createClient()
+
   const form = useForm<z.infer<typeof authSchema>>({
     resolver: zodResolver(authSchema),
     defaultValues: {
@@ -30,6 +33,15 @@ export function LoginForm() {
 
   const onSubmit = form.handleSubmit((values: z.infer<typeof authSchema>) => {})
 
+  const handleOAuth = async (provider: 'github' | 'google') => {
+    await supabase.auth.signInWithOAuth({
+      provider,
+      options: {
+        redirectTo: 'http://localhost:3000/auth/callback',
+      },
+    })
+  }
+
   return (
     <Form {...form}>
       <form onSubmit={onSubmit} className="flex w-[400px] flex-col gap-y-8">
@@ -38,11 +50,19 @@ export function LoginForm() {
           <p className="text-muted-foreground">Sign in to your account</p>
         </div>
         <div className="space-y-4">
-          <Button className="w-full">
+          <Button
+            type="button"
+            className="w-full"
+            onClick={() => handleOAuth('github')}
+          >
             <GithubLogo className="mr-2 h-4 w-4" />
             Continue with Github
           </Button>
-          <Button className="w-full">
+          <Button
+            type="button"
+            className="w-full"
+            onClick={() => handleOAuth('google')}
+          >
             <GoogleLogo className="mr-2 h-4 w-4" />
             Continue with Google
           </Button>
@@ -112,7 +132,7 @@ export function LoginForm() {
         </div>
         <div className="mt-4 text-center text-sm">
           Don&apos;t have an account?{' '}
-          <Link href="/auth/sign-up" className="underline hover:opacity-75">
+          <Link href="/auth/register" className="underline hover:opacity-75">
             Sign Up Now
           </Link>
         </div>
